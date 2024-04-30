@@ -20,7 +20,7 @@ const Login = () => {
     const data = await response.json();
     if (response.ok) {
       localStorage.setItem('auth_token', data.access_token);
-      navigate('/');
+      navigate('/?login=success');
     } else {
       toast({
         title: 'Login Failed',
