@@ -1,4 +1,5 @@
 import { Box, Flex, Text, Input, Button, VStack, HStack, Tag, useMediaQuery, useColorModeValue } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 const developers = [
@@ -30,7 +31,9 @@ const Index = () => {
         {filteredDevelopers.map(dev => (
           <Flex key={dev.id} p={5} shadow="md" borderWidth="1px" borderRadius="lg" flexDirection={isLargerThan768 ? 'row' : 'column'} align="center" justify="space-between">
             <VStack align="left">
-              <Text fontSize="lg" fontWeight="bold">{dev.name}</Text>
+              <Link to={`/developer/${dev.id}`} style={{ textDecoration: 'none' }}>
+                <Text fontSize="lg" fontWeight="bold" color="blue.500" _hover={{ color: 'blue.700' }}>{dev.name}</Text>
+              </Link>
               <Text>{dev.location}</Text>
             </VStack>
             <HStack spacing={2}>
