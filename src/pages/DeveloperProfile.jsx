@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Box, Flex, Text, Button, VStack, Tag, Input, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, Text, Button, VStack, Tag, Input, useColorModeValue, HStack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { client } from 'lib/crud';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const developers = [
   { id: '1', name: 'Alice Johnson', location: 'New York, USA', technologies: ['React', 'Node.js'], bio: 'Experienced Frontend Developer with a demonstrated history of working in the internet industry.' },
@@ -26,6 +27,24 @@ const DeveloperProfile = () => {
     console.error("Developer not found for ID:", developerId);
     return <Box p={5}><Text>No developer found.</Text></Box>;
   }
+
+  const editMessage = (index) => {
+    const newText = prompt('Edit your message:', messages[index].text);
+    if (newText !== null && newText !== messages[index].text) {
+      const updatedMessages = [...messages];
+      updatedMessages[index].text = newText;
+      setMessages(updatedMessages);
+      const messageKey = `message:${developerId}:${messages[index].date}`;
+      client.set(messageKey, { text: newText, date: messages[index].date });
+    }
+  };
+
+  const deleteMessage = (index) => {
+    const updatedMessages = messages.filter((_, i) => i !== index);
+    setMessages(updatedMessages);
+    const messageKey = `message:${developerId}:${messages[index].date}`;
+    client.delete(messageKey);
+  };
 
   return (
     <Box p={5}>
@@ -61,8 +80,12 @@ const DeveloperProfile = () => {
             });
         }}>Send Message</Button>
         {messages.map((msg, index) => (
-          <Box key={index} p={2} shadow="md" borderWidth="1px">
+          <Box key={index} p={2} shadow="md" borderWidth="1px" display="flex" justifyContent="space-between" alignItems="center">
             <Text>{msg.date}: {msg.text}</Text>
+            <HStack>
+              <Button size="sm" onClick={() => editMessage(index)}><FaEdit /></Button>
+              <Button size="sm" colorScheme="red" onClick={() => deleteMessage(index)}><FaTrash /></Button>
+            </HStack>
           </Box>
         ))}
       </VStack>
