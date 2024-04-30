@@ -11,7 +11,7 @@ function RouteIndex() {
   if (loginSuccess) {
     return <Index />;
   } else {
-    return sessionStorage.getItem('auth_token') ? <Index /> : <Navigate to="/login" />;
+    return localStorage.getItem('auth_token') ? <Index /> : <Navigate to="/login" />;
   }
 }
 
