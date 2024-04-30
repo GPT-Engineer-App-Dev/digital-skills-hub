@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Input, Button, VStack, HStack, Tag, useMediaQuery } from '@chakra-ui/react';
+import { Box, Flex, Text, Input, Button, VStack, HStack, Tag, useMediaQuery, useColorModeValue } from '@chakra-ui/react';
 import { useState } from 'react';
 
 const developers = [
@@ -34,7 +34,17 @@ const Index = () => {
               <Text>{dev.location}</Text>
             </VStack>
             <HStack spacing={2}>
-              {dev.technologies.map(tech => <Tag key={tech}>{tech}</Tag>)}
+              {dev.technologies.map(tech => {
+                const tagColor = useColorModeValue({
+                  'React': 'blue',
+                  'Node.js': 'green',
+                  'Vue': 'teal',
+                  'Django': 'orange',
+                  'Angular': 'red',
+                  'Java': 'yellow'
+                }[tech], 'gray');
+                return <Tag key={tech} colorScheme={tagColor}>{tech}</Tag>;
+              })}
             </HStack>
             <Button colorScheme="blue">Message</Button>
           </Flex>
