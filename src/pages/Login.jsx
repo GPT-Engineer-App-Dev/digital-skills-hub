@@ -19,7 +19,7 @@ const Login = () => {
     });
     const data = await response.json();
     if (response.ok) {
-      sessionStorage.setItem('auth_token', data.access_token);
+      localStorage.setItem('auth_token', data.access_token);
       navigate('/');
     } else {
       toast({
