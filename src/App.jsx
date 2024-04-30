@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-dom";
 import Index from "./pages/Index.jsx";
 import DeveloperProfile from './pages/DeveloperProfile.jsx';
 import Login from './pages/Login.jsx';
