@@ -46,7 +46,6 @@ const Index = () => {
                 return <Tag key={tech} colorScheme={tagColor}>{tech}</Tag>;
               })}
             </HStack>
-            <Button colorScheme="blue">Message</Button>
           </Flex>
         ))}
       </VStack>
