@@ -19,8 +19,8 @@ const Login = () => {
     });
     const data = await response.json();
     if (response.ok) {
-      localStorage.setItem('auth_token', data.access_token);
-      navigate('/?login=success');
+      sessionStorage.setItem('auth_token', data.access_token);
+      navigate('/');
     } else {
       toast({
         title: 'Login Failed',
