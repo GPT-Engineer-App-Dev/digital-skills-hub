@@ -9,12 +9,16 @@ const developers = [
 
 const DeveloperProfile = () => {
   const { developerId } = useParams();
+  console.log("DeveloperProfile component loaded.");
   const developer = developers.find(dev => dev.id === developerId);
+  console.log("Developer data fetched:", developer);
 
   if (!developer) {
+    console.log("No developer found for ID:", developerId);
     return <Box p={5}><Text>No developer found.</Text></Box>;
   }
 
+  console.log("Rendering DeveloperProfile for:", developer.name);
   return (
     <Box p={5}>
       <VStack spacing={5} align="left">
